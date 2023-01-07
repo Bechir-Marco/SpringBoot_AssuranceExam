@@ -31,9 +31,14 @@ public class Logging {
 //            log.info("Début Execution : " + name + " : ");
 //        }
 //    }
-@AfterReturning("execution(void com.example..*(..))")
-public void logMethodEntry(JoinPoint joinPoint) {
-    String name = joinPoint.getSignature().getName();
-    log.info("With success " + name );
-}
+//@AfterReturning("execution(void com.example..*(..))")
+//public void logMethodEntry(JoinPoint joinPoint) {
+//    String name = joinPoint.getSignature().getName();
+//    log.info("With success " + name );
+//}
+    @AfterReturning("execution(* com.example.coursclassroomexam.Serv.*.get*(..))")
+    public void logMethodEntry(JoinPoint joinPoint) {
+        String name = joinPoint.getSignature().getName();
+        log.info("With success " + name );
+    }
 }
