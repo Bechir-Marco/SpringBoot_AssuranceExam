@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BeneficiaireRepo extends JpaRepository<Beneficiaire, Integer> {
-
+    Beneficiaire findBeneficiaireByCin( Integer cin);
 }

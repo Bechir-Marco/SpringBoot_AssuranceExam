@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContratRepo extends JpaRepository<Contrat, Integer> {
 
+        Contrat findContratByMatricule(String m);
 
 }

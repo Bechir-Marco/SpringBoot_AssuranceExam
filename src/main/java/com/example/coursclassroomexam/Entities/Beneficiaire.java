@@ -19,7 +19,7 @@ import java.util.Set;
 public class Beneficiaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+
     int id;
     int cin;
     String nom;
@@ -27,5 +27,6 @@ public class Beneficiaire implements Serializable {
     String profession;
     float salaire;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "beneficiaire")
+            @JsonIgnore
     List<Assurance> assuranceList;
 }

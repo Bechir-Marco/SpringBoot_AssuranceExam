@@ -25,9 +25,11 @@ public class Assurance implements Serializable {
     float montant;
 
     @ManyToOne(cascade = CascadeType.ALL)
+            @JsonIgnore
     Contrat contrat;
 
     @ManyToOne(cascade = CascadeType.ALL)
+            @JsonIgnore
     Beneficiaire beneficiaire;
 
 }
