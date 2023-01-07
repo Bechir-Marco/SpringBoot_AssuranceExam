@@ -6,7 +6,9 @@ import com.example.coursclassroomexam.Serv.Serv;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,5 +31,13 @@ public class CcController {
     @GetMapping("/getContratBf/{idBf}")
     public Contrat getContratBf (@PathVariable int idBf) {
         return serv.getContratBf(idBf);
+    }
+    @GetMapping("/getBeneficairesByType/{typeContrat}")
+    public Set<Beneficiaire> getBeneficairesByType (@PathVariable TypeContrat typeContrat) {
+        return serv.getBeneficairesByType(typeContrat);
+    }
+    @GetMapping("/getMontantBf/{cinBf}")
+    public float getMontantBf(@PathVariable int cinBf) {
+       return serv.getMontantBf(cinBf);
     }
 }

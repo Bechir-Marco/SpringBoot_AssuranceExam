@@ -5,6 +5,7 @@ package com.example.coursclassroomexam.Serv;
 import com.example.coursclassroomexam.Entities.Assurance;
 import com.example.coursclassroomexam.Entities.Beneficiaire;
 import com.example.coursclassroomexam.Entities.Contrat;
+import com.example.coursclassroomexam.Entities.TypeContrat;
 import com.example.coursclassroomexam.Repo.AssuranceRepo;
 import com.example.coursclassroomexam.Repo.BeneficiaireRepo;
 import com.example.coursclassroomexam.Repo.ContratRepo;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -57,8 +59,28 @@ public class ServImp implements Serv {
                 contrat = assurance.getContrat();
             }
         }
-
     return contrat;
+    }
+    public Set<Beneficiaire> getBeneficairesByType (TypeContrat typeContrat) {
+        return beneficiaireRepo.findBeneficiairesByType (typeContrat);
+    }
+
+    @Override
+    public float getMontantBf(int cinBf) {
+        float montant =0;
+        Beneficiaire b = beneficiaireRepo.findBeneficiaireByCin(cinBf);
+        List <Assurance> assurances = assuranceRepo.findAssurancesByBeneficiaire(b);
+        for (Assurance a: assurances
+             ) {
+            if (a.getContrat().getTypeContrat()  == TypeContrat.Mensuel) {
+                montant += b.getSalaire()*12;
+            }
+            else if (a.getContrat().getTypeContrat() == TypeContrat.Semestriel)
+                montant+= b.getSalaire()*2;
+            else
+                montant +=b.getSalaire();
+        }
+        return montant;
     }
 }
 
